@@ -11,5 +11,5 @@ Here I want to use `Intrinsics` to XOR bytes as fast as possible. The way I foun
 Currently this is the fastest way of XORing on my Hardware:
 
 ```csharp
-(new Vector<long>(oldScreen, position) ^ new Vector<long>(newScreen, position)).CopyTo(difference, position);
+Avx2.Store(ppDiff, Avx2.Xor(Avx2.LoadVector256(ppOld), Avx2.LoadVector256(ppNew)));
 ```

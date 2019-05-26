@@ -16,6 +16,13 @@ namespace Intrinsics
                 return;
             }
 
+            if (!Avx2.IsSupported)
+            {
+                Console.WriteLine("AVX2 is not supported.");
+
+                return;
+            }
+
             if (!Vector.IsHardwareAccelerated)
             {
                 Console.WriteLine("SIMD is not supported.");

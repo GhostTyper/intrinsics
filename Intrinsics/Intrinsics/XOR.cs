@@ -105,7 +105,7 @@ namespace Intrinsics
 
         [Benchmark]
         [ArgumentsSource(nameof(DataSourceBytes))]
-        public unsafe void Intrinsics(byte[] oldScreen, byte[] newScreen, byte[] difference)
+        public unsafe void IntrinsicsAVX(byte[] oldScreen, byte[] newScreen, byte[] difference)
         {
             int steps = difference.Length / 16;
 
@@ -119,6 +119,25 @@ namespace Intrinsics
 
                 for (int position = 0; position < steps; ppOld += 2, ppNew += 2, ppDiff += 2, position++)
                     Avx.Store(ppDiff, Avx.Xor(Avx.LoadVector128(ppOld), Avx.LoadVector128(ppNew)));
+            }
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(DataSourceBytes))]
+        public unsafe void IntrinsicsAVX2(byte[] oldScreen, byte[] newScreen, byte[] difference)
+        {
+            int steps = difference.Length / 32;
+
+            fixed (byte* pOld = oldScreen)
+            fixed (byte* pNew = newScreen)
+            fixed (byte* pDiff = difference)
+            {
+                long* ppOld = (long*)pOld;
+                long* ppNew = (long*)pNew;
+                long* ppDiff = (long*)pDiff;
+
+                for (int position = 0; position < steps; ppOld += 4, ppNew += 4, ppDiff += 4, position++)
+                    Avx2.Store(ppDiff, Avx2.Xor(Avx2.LoadVector256(ppOld), Avx2.LoadVector256(ppNew)));
             }
         }
 

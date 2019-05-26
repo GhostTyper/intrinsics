@@ -72,7 +72,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void IntrinsicsTest()
+        public void IntrinsicsAVXTest()
         {
             Intrinsics.XOR xor = new Intrinsics.XOR();
 
@@ -86,7 +86,29 @@ namespace UnitTests
                 newScreen = (byte[])data[1];
                 difference = (byte[])data[2];
 
-                xor.Intrinsics(oldScreen, newScreen, difference);
+                xor.IntrinsicsAVX(oldScreen, newScreen, difference);
+
+                for (int position = 0; position < difference.Length; position++)
+                    Assert.AreEqual(difference[position], (byte)(oldScreen[position] ^ newScreen[position]), $"Invalid byte at position {position}: 0x{difference[position].ToString("x02")} != 0x{(oldScreen[position] ^ newScreen[position]).ToString("x02")}.");
+            }
+        }
+
+        [TestMethod]
+        public void IntrinsicsAVX2Test()
+        {
+            Intrinsics.XOR xor = new Intrinsics.XOR();
+
+            byte[] oldScreen;
+            byte[] newScreen;
+            byte[] difference;
+
+            foreach (object[] data in xor.DataSourceBytes())
+            {
+                oldScreen = (byte[])data[0];
+                newScreen = (byte[])data[1];
+                difference = (byte[])data[2];
+
+                xor.IntrinsicsAVX2(oldScreen, newScreen, difference);
 
                 for (int position = 0; position < difference.Length; position++)
                     Assert.AreEqual(difference[position], (byte)(oldScreen[position] ^ newScreen[position]), $"Invalid byte at position {position}: 0x{difference[position].ToString("x02")} != 0x{(oldScreen[position] ^ newScreen[position]).ToString("x02")}.");
