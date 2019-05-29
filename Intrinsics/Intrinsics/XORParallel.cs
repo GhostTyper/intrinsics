@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Intrinsics
 {
+    /// <summary>
+    /// This class tests parallel execution speed of the "real world application" XOR with minimal memory footprint.
+    /// </summary>
     public class XORParallel
     {
-        private object sync = new object();
-
         /// <summary>
         /// This gives a small test set for parallel execution.
         /// </summary>

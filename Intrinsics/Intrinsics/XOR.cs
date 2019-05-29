@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Intrinsics
 {
+    /// <summary>
+    /// This class tests a real world application: XORing two screens to detect changes.
+    /// </summary>
     public class XOR
     {
         /// <summary>
