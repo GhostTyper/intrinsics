@@ -20,4 +20,4 @@ I observed that various techniques don't work well in parallel. Here you can see
 
 ![BenchmarkDotnet Statistics of XORParallel](./currentBench.png)
 
-In this case AVX2 just needs ~10 ms when using one core, but 80 ms when using two cores. I will investigate in this.
+In this case AVX2 just needs ~10 ms when using one core, but 80 ms when using two cores. I asked this question on GitHub: [.NET Core 3 Intrinsics AVX2 used in parallel have low performance](https://stackoverflow.com/questions/56362254/net-core-3-intrinsics-avx2-used-in-parallel-has-low-performance).
