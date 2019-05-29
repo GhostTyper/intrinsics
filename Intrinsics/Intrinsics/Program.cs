@@ -30,7 +30,8 @@ namespace Intrinsics
                 return;
             }
 
-            BenchmarkRunner.Run<XOR>();
+            // BenchmarkRunner.Run<XOR>();
+            BenchmarkRunner.Run<XORParallel>();
         }
     }
 }
