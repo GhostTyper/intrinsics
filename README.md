@@ -18,7 +18,7 @@ Avx2.Store(ppDiff, Avx2.Xor(Avx2.LoadVector256(ppOld), Avx2.LoadVector256(ppNew)
 
 I observed that various techniques don't work well in parallel.
 
-In this case AVX2 just needs ~10 ms when using one core, but 80 ms when using two cores. I asked this question on StackOverflow: [.NET Core 3 Intrinsics AVX2 used in parallel have low performance](https://stackoverflow.com/questions/56362254/net-core-3-intrinsics-avx2-used-in-parallel-has-low-performance).
+In this case AVX2 just needs ~10 ms when using one core, but 80 ms when using two cores. I will investigate this further.
 
 # XORParallelWithoutMemory
 
@@ -31,3 +31,13 @@ This leads me to the question where this problem may come from. I suspect the CL
 # XORParallelSameScopeMemory
 
 This test tries to find out, if the variable scope does matter for performance.
+
+It seems that the CLR copies contents of variables which have been changed directly to the memory, when the variable has a global (outside the `delegate`) scope.
+
+What we learn:
+
+When we want to optimize with intrinsics, better first check which scope your variables have, etc.
+
+# XORParallelSameScopeMemoryForReadAccess
+
+This test tries to find out, if only write access needs to be in the same scope (my assumption).

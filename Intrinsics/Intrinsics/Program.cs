@@ -33,7 +33,8 @@ namespace Intrinsics
             // BenchmarkRunner.Run<XOR>();
             // BenchmarkRunner.Run<XORParallel>();
             // BenchmarkRunner.Run<XORParallelWithoutMemory>();
-            BenchmarkRunner.Run<XORParallelSameScopeMemory>();
+            // BenchmarkRunner.Run<XORParallelSameScopeMemory>();
+            BenchmarkRunner.Run<XORParallelSameScopeMemoryForReadAccess>();
         }
     }
 }
