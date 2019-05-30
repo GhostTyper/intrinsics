@@ -41,3 +41,5 @@ When we want to optimize with intrinsics, better first check which scope your va
 # XORParallelSameScopeMemoryForReadAccess
 
 This test tries to find out, if only write access needs to be in the same scope (my assumption).
+
+We see: When writing to memory, take care the memory is as local as possible to give the CLR the biggest chance to optimize the memory-access.
